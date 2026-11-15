@@ -1,0 +1,148 @@
+/* Nicholas Norris: site styles. Layout mirrors the original Squarespace site. */
+:root {
+  --sidebar: 280px;
+  --ink: #000;
+  --nav: #2e2e2e;
+  --muted: #777;
+  --faint: #aaa;
+  --cell: #ececec;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; background: #fff; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  line-height: 1.9;
+  color: var(--muted);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: var(--ink); }
+img { display: block; max-width: 100%; }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar);
+  padding: 38px 40px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+nav ul { list-style: none; margin: 0; padding: 0; }
+nav a { font-size: 13px; letter-spacing: -0.5px; }
+nav a[aria-current="page"] { color: var(--ink); }
+.nav-primary { margin-top: 28px; }
+.nav-primary a { color: var(--nav); line-height: 19px; }
+.nav-secondary { margin-top: 22px; }
+.nav-secondary a { color: var(--faint); line-height: 31px; }
+.nav-secondary a[aria-current="page"] { color: var(--ink); }
+
+/* Main column */
+main {
+  margin-left: var(--sidebar);
+  padding: 24px 35px 80px 0;
+  min-height: 100vh;
+}
+
+.column { max-width: 780px; }
+
+/* Home + installation views */
+.stack img { width: 100%; height: auto; margin-bottom: 52px; background: var(--cell); }
+.stack figure { margin: 0; }
+.stack figcaption { margin: -40px 0 52px; }
+
+/* Thumbnail grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.grid a { display: block; aspect-ratio: 1 / 1; background: var(--cell); overflow: hidden; }
+.grid img { width: 100%; height: 100%; object-fit: cover; transition: opacity .2s; }
+.grid a:hover img { opacity: .85; }
+
+/* Single painting viewer */
+.viewer {
+  height: calc(100vh - 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.viewer img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.caption {
+  margin-top: auto;
+  font-size: 11px;
+  line-height: 2;
+  color: #444;
+}
+.caption .title { font-weight: 700; color: var(--ink); letter-spacing: 1px; }
+.caption .controls {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #333;
+}
+.caption .controls a:hover { color: var(--ink); }
+.caption .show-thumbs { display: inline-block; margin-top: 6px; color: #666; }
+
+[hidden] { display: none !important; }
+
+/* CV */
+.cv { max-width: 700px; }
+.cv section { margin-bottom: 34px; }
+.cv h2 { font-size: 12px; font-weight: 700; color: #555; margin: 0 0 14px; letter-spacing: 1px; }
+.cv h3 { font-size: 12px; font-weight: 400; margin: 22px 0 2px; }
+.cv p { margin: 0 0 4px; }
+.cv ul { list-style: none; margin: 0; padding: 0; }
+.cv .dated li { display: grid; grid-template-columns: 70px 1fr; margin-bottom: 4px; }
+
+/* Contact */
+.contact p { margin: 0; }
+
+/* Mobile */
+@media (max-width: 767px) {
+  .sidebar {
+    position: static;
+    width: auto;
+    padding: 28px 20px 8px;
+  }
+  .site-title { font-size: 22px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px; }
+  nav { display: flex; flex-wrap: wrap; gap: 0 14px; margin-top: 14px; }
+  .nav-primary, .nav-secondary { display: contents; }
+  .nav-primary a, .nav-secondary a { line-height: 26px; font-size: 13px; letter-spacing: 0; }
+  .caption { display: none; }
+  main { margin-left: 0; padding: 16px 20px 60px; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .viewer { height: auto; display: block; }
+  .viewer img { max-height: 75vh; margin: 0 auto; }
+  .mobile-caption { display: block; margin-top: 18px; }
+  .stack img { margin-bottom: 20px; }
+}
+@media (min-width: 768px) {
+  .mobile-caption { display: none !important; }
+}
