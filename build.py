@@ -205,10 +205,10 @@ def build_show(show):
         <h1>{esc(show['title'])}</h1>
 {meta_html}
       </header>
-{text}
       <div class="column stack">
 {chr(10).join(figs)}
       </div>
+{text}
       {'<h2 class="show-works">Works</h2>' if works else ''}
     </div>
 {grid}{viewer}

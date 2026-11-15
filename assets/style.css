@@ -128,8 +128,8 @@ main {
 .show-head { margin: 0 0 26px; }
 .show-head h1 { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: 0; margin: 0 0 8px; line-height: 1.3; }
 .show-head p { margin: 0; }
-.show-text { max-width: 620px; margin: 0 0 40px; color: #555; }
-.show-text p { margin: 0 0 12px; }
+.show-text { max-width: 620px; margin: 0 0 56px; color: #555; line-height: 1.95; letter-spacing: 0.3px; font-size: 13px; }
+.show-text p { margin: 0 0 16px; }
 .show-text a, .show-foot a { color: #444; text-decoration: underline; text-underline-offset: 3px; }
 .show-text .credit { margin-top: 14px; }
 .show-works { font-size: 12px; font-weight: 700; color: #555; letter-spacing: 1px; margin: 4px 0 14px; }
