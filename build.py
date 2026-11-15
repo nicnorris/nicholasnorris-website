@@ -172,20 +172,50 @@ def build_show(show):
     base_orig = ORIG / "shows" / slug
     img_dir = f"img/shows/{slug}"
 
-    figs = []
-    for name in show.get("installation_views", []):
+    def install_img(name, eager=False):
         rel = f"{img_dir}/installation-views/{Path(name).stem}.jpg"
         w, h = resized(base_orig / "installation-views" / name, OUT / rel, width=WIDE)
-        figs.append(f'        <img src="{rel}" alt="{esc(show["title"])}, installation view" loading="lazy" width="{w}" height="{h}">')
+        lazy = "" if eager else ' loading="lazy"'
+        return f'        <img src="{rel}" alt="{esc(show["title"])}, installation view"{lazy} width="{w}" height="{h}">'
 
     grid, viewer, works = gallery(show.get("works", []), base_orig / "works", f"{img_dir}/works")
 
     meta = [esc(show.get("kind", "")), esc(f"{show['venue']}, {show['city']}"), esc(show["dates"])]
     meta_html = "\n".join(f"        <p>{m}</p>" for m in meta if m)
 
-    if show.get("text_html"):
-        credit = f'\n        <p class="credit">Text by {esc(show["text_credit"])}</p>' if show.get("text_credit") else ""
-        text = f'      <div class="show-text">\n{show["text_html"]}{credit}\n      </div>'
+    paras = show.get("text_paragraphs", [])
+    credit = f'\n        <p class="credit">Text by {esc(show["text_credit"])}</p>' if show.get("text_credit") and paras else ""
+
+    def text_block(nums, last=False):
+        ps = "\n".join(f"        <p>{esc(paras[n - 1], quote=False)}</p>" for n in nums)
+        return f'      <div class="show-text">\n{ps}{credit if last else ""}\n      </div>'
+
+    used, figs = set(), []
+    if show.get("sequence") and paras:
+        # Photos and essay paragraphs woven together, in the order the show file lists them
+        parts = []
+        steps = show["sequence"]
+        for i, step in enumerate(steps):
+            if step.get("image"):
+                parts.append(f'      <div class="column stack">\n{install_img(step["image"], eager=(i == 0))}\n      </div>')
+                used.add(step["image"])
+            if step.get("paragraphs"):
+                parts.append(text_block(step["paragraphs"], last=(i == len(steps) - 1)))
+        # Any installation views not placed in the sequence go after it
+        rest = [install_img(n) for n in show.get("installation_views", []) if n not in used]
+        if rest:
+            parts.append(f'      <div class="column stack">\n{chr(10).join(rest)}\n      </div>')
+        figs = [s for s in show["sequence"] if s.get("image")] + rest
+        middle = "\n".join(parts)
+    else:
+        figs = [install_img(n, eager=(i == 0)) for i, n in enumerate(show.get("installation_views", []))]
+        middle = f'      <div class="column stack">\n{chr(10).join(figs)}\n      </div>'
+
+    if paras and not show.get("sequence"):
+        middle += "\n" + text_block(range(1, len(paras) + 1), last=True)
+        text = ""
+    elif paras:
+        text = ""
     elif show.get("text_link"):
         by = f' by {esc(show["text_credit"])}' if show.get("text_credit") else ""
         text = f'      <div class="show-text"><p><a href="{esc(show["text_link"])}">Read the exhibition text{by}</a></p></div>'
@@ -205,10 +235,8 @@ def build_show(show):
         <h1>{esc(show['title'])}</h1>
 {meta_html}
       </header>
-      <div class="column stack">
-{chr(10).join(figs)}
-      </div>
 {text}
+{middle}
       {'<h2 class="show-works">Works</h2>' if works else ''}
     </div>
 {grid}{viewer}
