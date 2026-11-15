@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build nicholasnorris.com into ./docs (the folder GitHub Pages publishes).
 
-Content lives in ./content (paintings.json, installation-views.json, cv.html, site.json)
-and full-size photos in ./originals. Run:  python3 build.py
+Content lives in ./content (paintings.json, installation-views.json, cv.html, site.json,
+shows/*.json) and full-size photos in ./originals. Run:  python3 build.py
 """
 import html
 import json
@@ -25,6 +25,11 @@ site = json.loads((CONTENT / "site.json").read_text())
 paintings = json.loads((CONTENT / "paintings.json").read_text())
 installs = json.loads((CONTENT / "installation-views.json").read_text())
 cv_html = (CONTENT / "cv.html").read_text()
+shows_dir = CONTENT / "shows"
+shows = sorted(
+    (json.loads(p.read_text()) for p in shows_dir.glob("*.json")),
+    key=lambda s: s.get("menu_order", 99),
+) if shows_dir.exists() else []
 esc = html.escape
 
 
@@ -38,12 +43,12 @@ def save_jpeg(im, dest, quality=84):
 
 
 def resized(src, dest, long_edge=None, width=None, square=None):
-    """Write a web-sized copy of src, skipping if it is already up to date."""
+    """Write a web-sized copy of src (never upscaled), skipping if already up to date."""
     if dest.exists() and dest.stat().st_mtime >= src.stat().st_mtime:
         return Image.open(dest).size
     im = ImageOps.exif_transpose(Image.open(src))
     if square:
-        im = ImageOps.fit(im, (square, square), Image.LANCZOS)
+        im = ImageOps.fit(im, (min(square, im.width, im.height),) * 2, Image.LANCZOS)
     elif long_edge:
         im.thumbnail((long_edge, long_edge), Image.LANCZOS)
     elif width and im.width > width:
@@ -52,26 +57,35 @@ def resized(src, dest, long_edge=None, width=None, square=None):
     return im.size
 
 
-NAV = [
-    ("index.html", "Home", "primary"),
-    ("paintings.html", "Paintings", "primary"),
-    ("installation-views.html", "Installation Views", "primary"),
-    ("cv.html", "CV", "secondary"),
-    ("contact.html", "Contact", "secondary"),
-]
+def nav_items():
+    items = [
+        ("index.html", "Home", "primary"),
+        ("paintings.html", "Paintings", "primary"),
+        ("installation-views.html", "Installation Views", "primary"),
+    ]
+    items += [(f"{s['slug']}.html", s["title"], "shows") for s in shows if s.get("menu", True)]
+    items += [("cv.html", "CV", "secondary"), ("contact.html", "Contact", "secondary")]
+    return items
 
 
 def page(filename, title, body, extra_sidebar="", scripts="", og_image=None, base=""):
     full_title = site["name"] if filename == "index.html" else f"{title} | {site['name']}"
+
     def links(group):
         out = []
-        for href, label, g in NAV:
+        for href, label, g in nav_items():
             if g != group:
                 continue
             cur = ' aria-current="page"' if href == filename else ""
             out.append(f'<li><a href="{href}"{cur}>{esc(label)}</a></li>')
         return "\n        ".join(out)
-    og = og_image or f"img/installation-views/{site['home_image']}"
+
+    show_links = links("shows")
+    show_block = f"""
+      <ul class="nav-shows">
+        {show_links}
+      </ul>""" if show_links else ""
+    og = og_image or f"img/installation-views/{Path(site['home_image']).stem}.jpg"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +105,7 @@ def page(filename, title, body, extra_sidebar="", scripts="", og_image=None, bas
     <nav aria-label="Main">
       <ul class="nav-primary">
         {links('primary')}
-      </ul>
+      </ul>{show_block}
       <ul class="nav-secondary">
         {links('secondary')}
       </ul>
@@ -117,6 +131,98 @@ CAPTION = """
         </div>
       </div>"""
 
+GALLERY_SCRIPT = '\n  <script src="assets/gallery.js"></script>'
+
+
+def gallery(items, orig_dir, img_dir):
+    """Thumbnail grid + one-at-a-time viewer for a list of works.
+
+    Returns (grid_html, viewer_html, works) where works feeds the viewer script.
+    """
+    works, cells, seen = [], [], set()
+    for p in items:
+        slug = slugify(p["title"])
+        while slug in seen or slug == "thumbnails":
+            slug += "-2"
+        seen.add(slug)
+        src = orig_dir / p["image"]
+        stem = Path(p["image"]).stem
+        large = f"{img_dir}/{stem}.jpg"
+        thumb = f"{img_dir}/thumbs/{stem}.jpg"
+        resized(src, OUT / large, long_edge=LARGE)
+        tw, th = resized(src, OUT / thumb, square=THUMB)
+        alt = f"{p['title']}, {p['year']}. {p['medium']}, {p['size']}."
+        works.append({"slug": slug, "title": p["title"], "year": p["year"],
+                      "medium": p["medium"], "size": p["size"], "large": large})
+        cells.append(f'      <a href="#{slug}"><img src="{thumb}" alt="{esc(alt)}" loading="lazy" width="{tw}" height="{th}"></a>')
+    data = json.dumps(works, ensure_ascii=False).replace("</", "<\\/")
+    grid = f"""    <div class="grid">
+{chr(10).join(cells)}
+    </div>"""
+    viewer = f"""
+    <div class="viewer" hidden>
+      <img alt="">
+    </div>{CAPTION.format(cls=' mobile-caption')}
+    <script type="application/json" id="paintings-data">{data}</script>"""
+    return grid, viewer, works
+
+
+def build_show(show):
+    slug = show["slug"]
+    base_orig = ORIG / "shows" / slug
+    img_dir = f"img/shows/{slug}"
+
+    figs = []
+    for name in show.get("installation_views", []):
+        rel = f"{img_dir}/installation-views/{Path(name).stem}.jpg"
+        w, h = resized(base_orig / "installation-views" / name, OUT / rel, width=WIDE)
+        figs.append(f'        <img src="{rel}" alt="{esc(show["title"])}, installation view" loading="lazy" width="{w}" height="{h}">')
+
+    grid, viewer, works = gallery(show.get("works", []), base_orig / "works", f"{img_dir}/works")
+
+    meta = [esc(show.get("kind", "")), esc(f"{show['venue']}, {show['city']}"), esc(show["dates"])]
+    meta_html = "\n".join(f"        <p>{m}</p>" for m in meta if m)
+
+    if show.get("text_html"):
+        credit = f'\n        <p class="credit">Text by {esc(show["text_credit"])}</p>' if show.get("text_credit") else ""
+        text = f'      <div class="show-text">\n{show["text_html"]}{credit}\n      </div>'
+    elif show.get("text_link"):
+        by = f' by {esc(show["text_credit"])}' if show.get("text_credit") else ""
+        text = f'      <div class="show-text"><p><a href="{esc(show["text_link"])}">Read the exhibition text{by}</a></p></div>'
+    else:
+        text = ""
+
+    links = " · ".join(f'<a href="{esc(l["url"])}">{esc(l["label"])}</a>' for l in show.get("links", []))
+    foot = []
+    if links:
+        foot.append(f"        <p>{links}</p>")
+    if show.get("image_credit"):
+        foot.append(f"        <p>{esc(show['image_credit'])}</p>")
+    foot_html = "\n".join(foot)
+
+    body = f"""    <div class="show" data-hide-in-viewer>
+      <header class="show-head">
+        <h1>{esc(show['title'])}</h1>
+{meta_html}
+      </header>
+{text}
+      <div class="column stack">
+{chr(10).join(figs)}
+      </div>
+      {'<h2 class="show-works">Works</h2>' if works else ''}
+    </div>
+{grid}{viewer}
+    <footer class="show-foot" data-hide-in-viewer>
+{foot_html}
+    </footer>"""
+    og = f"{img_dir}/installation-views/{Path(show['installation_views'][0]).stem}.jpg" if show.get("installation_views") else None
+    (OUT / f"{slug}.html").write_text(page(
+        f"{slug}.html", show["title"], body,
+        extra_sidebar=CAPTION.format(cls=""),
+        scripts=GALLERY_SCRIPT if works else "",
+        og_image=og))
+    return len(works), len(figs)
+
 
 def build():
     if OUT.exists():
@@ -127,35 +233,11 @@ def build():
     shutil.copytree(ROOT / "assets", OUT / "assets", dirs_exist_ok=True)
 
     # Paintings
-    works, cells = [], []
-    seen = set()
-    for p in paintings:
-        slug = slugify(p["title"])
-        while slug in seen or slug == "thumbnails":
-            slug += "-2"
-        seen.add(slug)
-        src = ORIG / "paintings" / p["image"]
-        stem = Path(p["image"]).stem
-        large = f"img/paintings/{stem}.jpg"
-        thumb = f"img/paintings/thumbs/{stem}.jpg"
-        resized(src, OUT / large, long_edge=LARGE)
-        resized(src, OUT / thumb, square=THUMB)
-        alt = f"{p['title']}, {p['year']}. {p['medium']}, {p['size']}."
-        works.append({"slug": slug, "title": p["title"], "year": p["year"],
-                      "medium": p["medium"], "size": p["size"], "large": large})
-        cells.append(f'      <a href="#{slug}"><img src="{thumb}" alt="{esc(alt)}" loading="lazy" width="{THUMB}" height="{THUMB}"></a>')
-    data = json.dumps(works, ensure_ascii=False).replace("</", "<\\/")
-    body = f"""    <div class="grid">
-{chr(10).join(cells)}
-    </div>
-    <div class="viewer" hidden>
-      <img alt="">
-    </div>{CAPTION.format(cls=' mobile-caption')}
-    <script type="application/json" id="paintings-data">{data}</script>"""
+    grid, viewer, works = gallery(paintings, ORIG / "paintings", "img/paintings")
     (OUT / "paintings.html").write_text(page(
-        "paintings.html", "Paintings", body,
+        "paintings.html", "Paintings", grid + viewer,
         extra_sidebar=CAPTION.format(cls=""),
-        scripts='\n  <script src="assets/gallery.js"></script>',
+        scripts=GALLERY_SCRIPT,
         og_image=works[0]["large"] if works else None))
 
     # Installation views
@@ -177,6 +259,9 @@ def build():
         "index.html", "Home",
         f'    <div class="column stack">\n      <img src="{home_rel}" alt="Nicholas Norris, installation view" width="{w}" height="{h}">\n    </div>'))
 
+    # Shows
+    show_counts = [build_show(s) for s in shows]
+
     # CV and contact
     (OUT / "cv.html").write_text(page("cv.html", "CV", f'    <div class="cv">\n{cv_html}\n    </div>'))
     (OUT / "contact.html").write_text(page(
@@ -196,7 +281,8 @@ def build():
     if site.get("domain"):
         (OUT / "CNAME").write_text(site["domain"] + "\n")
 
-    print(f"Built {len(works)} paintings, {len(figs)} installation views into {OUT}")
+    print(f"Built {len(works)} paintings, {len(figs)} installation views, "
+          f"{len(shows)} show page(s) {show_counts} into {OUT}")
 
 
 if __name__ == "__main__":

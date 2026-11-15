@@ -8,7 +8,12 @@
   var viewer = document.querySelector('.viewer');
   var viewerImg = viewer.querySelector('img');
   var captions = document.querySelectorAll('[data-caption]');
+  var others = document.querySelectorAll('[data-hide-in-viewer]');
   var current = -1;
+
+  function setOthers(hidden) {
+    others.forEach(function (el) { el.hidden = hidden; });
+  }
 
   function indexOf(slug) {
     for (var i = 0; i < works.length; i++) if (works[i].slug === slug) return i;
@@ -39,6 +44,7 @@
     viewerImg.alt = w.title + ', ' + w.year + '. ' + w.medium + ', ' + w.size + '.';
     captions.forEach(function (el) { fill(el, w, i); });
     grid.hidden = true;
+    setOthers(true);
     viewer.hidden = false;
     document.title = w.title + ' | ' + document.body.dataset.site;
     preload(i + 1);
@@ -51,6 +57,7 @@
     viewer.hidden = true;
     captions.forEach(function (el) { el.hidden = true; });
     grid.hidden = false;
+    setOthers(false);
     document.title = document.body.dataset.title;
   }
 

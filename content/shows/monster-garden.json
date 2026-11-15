@@ -1,0 +1,45 @@
+{
+  "slug": "monster-garden",
+  "title": "Monster Garden",
+  "menu_order": 1,
+  "kind": "Solo exhibition",
+  "venue": "Galerie PJ",
+  "city": "Metz, France",
+  "dates": "12 September – 17 October 2026",
+  "text_html": "",
+  "text_credit": "David V. Whelan",
+  "text_link": "https://galerie-pj.com/exhibition/monster-garden-nicholas-norris/?lang=en",
+  "links": [
+    {"label": "Exhibition at Galerie PJ", "url": "https://galerie-pj.com/exhibition/monster-garden-nicholas-norris/?lang=en"},
+    {"label": "Catalogue", "url": "https://galerie-pj.com/catalogue/monster-garden/"}
+  ],
+  "image_credit": "Images courtesy of Galerie PJ, Metz.",
+  "installation_views": [
+    "01-Monster-11.jpg",
+    "02-Monster-6.jpg",
+    "03-Monster-5.jpg",
+    "04-Monster-1.jpg",
+    "05-Monster-12.jpg",
+    "06-Monster-4-1.jpg"
+  ],
+  "works": [
+    {"title": "Risen Sun", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "140 x 120 cm", "image": "01-risen-sun.jpg"},
+    {"title": "White Rainbow", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "95 x 80 cm", "image": "02-white-rainbow.jpg"},
+    {"title": "Palm Door", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "95 x 80 cm", "image": "03-palm-door.jpg"},
+    {"title": "Clay Palm", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "60 x 45 cm", "image": "04-clay-palm.jpg"},
+    {"title": "Night Rider", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "60 x 45 cm", "image": "05-night-rider.jpg"},
+    {"title": "Blue Daisy", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "32 x 25 cm", "image": "06-blue-daisy.jpg"},
+    {"title": "Lifted", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "32 x 25 cm", "image": "07-lifted.jpg"},
+    {"title": "Six Moons", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "32 x 25 cm", "image": "08-six-moons.jpg"},
+    {"title": "Spike", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "45 x 35 cm", "image": "09-spike.jpg"},
+    {"title": "Puddle Jumper", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "32 x 25 cm", "image": "10-puddle-jumper.jpg"},
+    {"title": "Pink Starburst", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "37 x 30 cm", "image": "11-pink-starburst.jpg"},
+    {"title": "Turbo Red", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "37 x 30 cm", "image": "12-turbo-red.jpg"},
+    {"title": "Cloud", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "24 x 19 cm", "image": "13-cloud.jpg"},
+    {"title": "Purple Garden", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "24 x 19 cm", "image": "14-purple-garden.jpg"},
+    {"title": "Sunburst", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "24 x 19 cm", "image": "15-sunburst.jpg"},
+    {"title": "Family", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "24 x 19 cm", "image": "16-family.jpg"},
+    {"title": "Trophy", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "24 x 19 cm", "image": "17-trophy.jpg"},
+    {"title": "E.Will Fly", "year": "2026", "medium": "Oil stick and acrylic on linen", "size": "24 x 19 cm", "image": "18-ewill-fly.jpg"}
+  ]
+}
