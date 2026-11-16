@@ -7,7 +7,6 @@
   "city": "New York, NY",
   "dates": "24 February – 25 March 2023",
   "text_credit": "David Whelan",
-  "text_link": "https://www.artsy.net/show/thierry-goldberg-gallery-turf-paradise/info",
   "links": [
     {
       "label": "Exhibition on Artsy",
@@ -46,6 +45,66 @@
       "medium": "Oil and oil stick on canvas",
       "size": "44 x 38 in",
       "image": "ayla.jpg"
+    }
+  ],
+  "text_paragraphs": [
+    "Nicholas Norris’ paintings create new spaces of connection and joy. Partially observed and partially imagined, the works are based on drawings made in and around the homes of friends and family. Although devoid of people, the contents of these spaces behave like people. Exuberant and at times off-kilter, they channel the eagerness and anxiety we feel in coming together. This sense of connectedness is paired with a charming imbalance and spatial ambiguity, as if to say that connection is not possible without being in motion.",
+    "Norris trusts the immediacy of his drawings. Made quickly from observation, these loose and open works depict spaces in Germany, California, and Arizona. Later, in the studio, Norris will flip through his sketchbook and choose drawings to bring to life on canvas, their imperfections and embellishments serving as a framework for each painting.",
+    "Certain patterns repeat in Norris’ paintings like a secret visual code. Looped and scalloped lines, daubs, dashes and swirls, then freeform areas resembling the fluid lines of water or wood grain. This is the tool box of glyphic language from which the drawings and paintings are constructed. When inside a room, the glyphs look like patterns adorning the space, but outside, they resemble minerals or atmospheric particles.",
+    "Norris adds layers of saturated color to his compositions, exploring color combinations that are deeply subjective. Bright hues vibrate against one another, imbuing each work with a frenetic energy. Everything in Norris’ world seems to be under the same spell, exciting and uncontrollable, hinting to a latent pulsation under all things.",
+    "The room in Blossom, 2023 is bathed in cool-blue light, its contents accented in electric orange, yellow, and pink. In the foreground, three trophies sit atop a blue side table. Trophies are a repeated subject in Norris’s work; a symbolic token of success or recognition but also allow the artist to paint miniature thresholds within the picture.",
+    "In Ayla, 2023 potted plants, unnameable objects, and bentwood chairs swirl around a golden tabletop. Each of these items is painted in vivid color, each a dense collage of Norris’ glyphic shapes, harmonizing and dancing with a cartoonish pep. The nighttime desert landscape appears flat through the windows, as though the stars and hill are not in-fact outdoors, but rather hanging inside like a curtain. Though subtle, ambiguities like this unsettle the space, causing a thrilling uncertainty to permeate the painting.",
+    "The tension between inside and outside breaks down entirely in Jet, 2023, a landscape of patterns and overlapping shapes. A primordial reservoir swirls at the painting’s center, its churning contents spilling out into the landscape like green slag. When spaces start to fall apart, they become more and more flexible, allowing the eye to play with their shape-shifting parts. This sparks an intellectual flexibility, causing you to wonder what space you’re standing in, and inviting you to let go of stability in a world of constant motion.",
+    "We often imagine things coming together when they are in agreement, creating a congruent whole. But Norris envisions a communion where the liveliness of parts remains at play, where things coalesce not because they’ve been tamed or integrated, but precisely because they are imperfect and incomplete."
+  ],
+  "sequence": [
+    {
+      "image": "01-230224_TGG_016.jpg",
+      "paragraphs": [
+        1
+      ]
+    },
+    {
+      "image": "03-230224_TGG_014.jpg",
+      "paragraphs": [
+        2
+      ]
+    },
+    {
+      "image": "02-230224_TGG_015.jpg",
+      "paragraphs": [
+        3
+      ]
+    },
+    {
+      "image": "06-230224_TGG_008.jpg",
+      "paragraphs": [
+        4
+      ]
+    },
+    {
+      "image": "05-230224_TGG_010.jpg",
+      "paragraphs": [
+        5
+      ]
+    },
+    {
+      "image": "04-230224_TGG_012.jpg",
+      "paragraphs": [
+        6
+      ]
+    },
+    {
+      "image": "08-230224_TGG_001.jpg",
+      "paragraphs": [
+        7
+      ]
+    },
+    {
+      "image": "07-230224_TGG_003.jpg",
+      "paragraphs": [
+        8
+      ]
     }
   ]
 }
