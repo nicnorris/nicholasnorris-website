@@ -209,7 +209,7 @@ def build_show(show):
         middle = "\n".join(parts)
     else:
         figs = [install_img(n, eager=(i == 0)) for i, n in enumerate(show.get("installation_views", []))]
-        middle = f'      <div class="column stack">\n{chr(10).join(figs)}\n      </div>'
+        middle = f'      <div class="column stack">\n{chr(10).join(figs)}\n      </div>' if figs else ""
 
     if paras and not show.get("sequence"):
         middle += "\n" + text_block(range(1, len(paras) + 1), last=True)

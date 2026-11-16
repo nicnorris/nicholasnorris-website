@@ -1,0 +1,164 @@
+{
+  "slug": "blooms",
+  "title": "blooms",
+  "menu_order": 3,
+  "kind": "Solo exhibition",
+  "venue": "Ekely",
+  "city": "Copenhagen, Denmark",
+  "dates": "30 November – 22 December 2023",
+  "text_paragraphs": [
+    "Nicholas Norris is a lively and intuitive painter. With vibrant colors and slightly off-balance compositions, the artist creates a dynamic undercurrent throughout all of his work. In this series of works, Norris boils down this frenetic energy to simple terms: thirty works on paper, painted with primarily handmade oil stick on a watercolor underpainting, each depicting a container with a single flower growing from its top. Although similar in size and structure, every painting has a different coloration and mood, showing us the broad range of this singular subject.",
+    "The containers resemble the clay pots we use for growing plants indoors, our way of welcoming a piece of the outside world into our homes. The flowers in these paintings are delicate and pensive, their blossoming not yet realized. Instead, the bloom’s latent energy is transferred onto the vessel’s surface, expressed with wild, abstract patterns and calligraphic marks. Each painting explores the tension between inside and outside in a different way, inviting us to move beyond what we see on the surface by imagining what is hidden within."
+  ],
+  "text_credit": "David Whelan",
+  "links": [
+    {
+      "label": "Exhibition at Ekely",
+      "url": "https://ekely.dk/event/3916"
+    }
+  ],
+  "image_credit": "Images courtesy of Ekely, Copenhagen.",
+  "installation_views": [],
+  "works": [
+    {
+      "title": "blooms 1",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-01.jpg"
+    },
+    {
+      "title": "blooms 2",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-02.jpg"
+    },
+    {
+      "title": "blooms 3",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-03.jpg"
+    },
+    {
+      "title": "blooms 4",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-04.jpg"
+    },
+    {
+      "title": "blooms 5",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-05.jpg"
+    },
+    {
+      "title": "blooms 6",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-06.jpg"
+    },
+    {
+      "title": "blooms 7",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-07.jpg"
+    },
+    {
+      "title": "blooms 8",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-08.jpg"
+    },
+    {
+      "title": "blooms 9",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-09.jpg"
+    },
+    {
+      "title": "blooms 10",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-10.jpg"
+    },
+    {
+      "title": "blooms 11",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-11.jpg"
+    },
+    {
+      "title": "blooms 12",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-12.jpg"
+    },
+    {
+      "title": "blooms 13",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-13.jpg"
+    },
+    {
+      "title": "blooms 14",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-14.jpg"
+    },
+    {
+      "title": "blooms 15",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-15.jpg"
+    },
+    {
+      "title": "blooms 16",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-16.jpg"
+    },
+    {
+      "title": "blooms 17",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-17.jpg"
+    },
+    {
+      "title": "blooms 18",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-18.jpg"
+    },
+    {
+      "title": "blooms 19",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-19.jpg"
+    },
+    {
+      "title": "blooms 20",
+      "year": "2023",
+      "medium": "Oil stick and watercolor on paper",
+      "size": "",
+      "image": "blooms-20.jpg"
+    }
+  ]
+}
