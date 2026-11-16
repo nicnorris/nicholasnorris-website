@@ -1,0 +1,51 @@
+{
+  "slug": "turf-paradise",
+  "title": "Turf Paradise",
+  "menu_order": 2,
+  "kind": "Solo exhibition",
+  "venue": "Thierry Goldberg Gallery",
+  "city": "New York, NY",
+  "dates": "24 February – 25 March 2023",
+  "text_credit": "David Whelan",
+  "text_link": "https://www.artsy.net/show/thierry-goldberg-gallery-turf-paradise/info",
+  "links": [
+    {
+      "label": "Exhibition on Artsy",
+      "url": "https://www.artsy.net/show/thierry-goldberg-gallery-turf-paradise"
+    }
+  ],
+  "image_credit": "Images courtesy of Thierry Goldberg Gallery, New York.",
+  "installation_views": [
+    "01-230224_TGG_016.jpg",
+    "02-230224_TGG_015.jpg",
+    "03-230224_TGG_014.jpg",
+    "04-230224_TGG_012.jpg",
+    "05-230224_TGG_010.jpg",
+    "06-230224_TGG_008.jpg",
+    "07-230224_TGG_003.jpg",
+    "08-230224_TGG_001.jpg"
+  ],
+  "works": [
+    {
+      "title": "Alba",
+      "year": "2023",
+      "medium": "Oil and oil stick on canvas",
+      "size": "54 x 48 in",
+      "image": "alba.jpg"
+    },
+    {
+      "title": "Blossom",
+      "year": "2023",
+      "medium": "Oil and oil stick on canvas",
+      "size": "38 x 32 in",
+      "image": "blossom.jpg"
+    },
+    {
+      "title": "Ayla",
+      "year": "2023",
+      "medium": "Oil and oil stick on canvas",
+      "size": "44 x 38 in",
+      "image": "ayla.jpg"
+    }
+  ]
+}
